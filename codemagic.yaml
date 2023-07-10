@@ -1,0 +1,29 @@
+workflows:
+  android:
+    name: Android Workflow
+    cache:
+      cache_paths:
+        - android/.gradle
+        - node_modules
+    environment:
+      groups:
+        - /android/app/peerwallet.keystore
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install
+      - name: Build APK
+        script: |
+          cd android
+          ./gradlew assembleRelease
+    triggering:
+      events:
+        - push
+        - pull_request
+        - tag
+      branch_patterns:
+        - pattern: master
+          include: true
+    artifacts:
+    - build/**/outputs/apk/**/*.apk
+    - build/**/outputs/apk/**/*.aab
