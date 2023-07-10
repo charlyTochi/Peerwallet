@@ -25,5 +25,4 @@ workflows:
         - pattern: master
           include: true
     artifacts:
-    - build/**/outputs/apk/**/*.apk
-    - build/**/outputs/apk/**/*.aab
+    - android/app/build/outputs/apk/release/app-release.apk
